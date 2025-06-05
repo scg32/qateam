@@ -7,22 +7,26 @@
       </q-card-section>
 
       <q-card-section>
+        <!-- <q-img
+          src="https://picsum.photos/500/300"
+          :ratio="1"
+        /> -->
         <q-form @submit="login">
           <q-input
             v-model="email"
             label="Email"
             type="email"
-            outlined
+            rounded filled
             class="q-mb-md"
           />
           <q-input
             v-model="password"
             label="Password"
             type="password"
-            outlined
+            filled
             class="q-mb-md"
           />
-          <q-btn label="Log In" type="submit" color="primary" class="full-width" />
+          <q-btn label="Log In" type="submit" color="primary" class="full-width" glossy fab />
         </q-form>
       </q-card-section>
     </q-card>

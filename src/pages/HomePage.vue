@@ -3,12 +3,12 @@
   <q-page>
     <q-card class="my-card">
       <q-card-section>
-        <div class="text-h5">Welcome to the Home Page</div>
+        <div class="text-h5">Hello world!</div>
       </q-card-section>
 
       <q-card-section>
         <div>
-          <q-btn label="Go to About" to="/about" color="primary" />
+          <q-btn label="Go to Login" to="/login" color="primary" />
           <q-btn label="Go to Profile" to="/profile" color="secondary" class="q-ml-sm" />
         </div>
       </q-card-section>
