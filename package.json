@@ -1,12 +1,17 @@
 {
   "name": "vue-quasar-supabase",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "lint": "eslint --ext .ts,.tsx,.js,.vue src/",
+    "lint:fix": "eslint --ext .ts,.tsx,.js,.vue src/ --fix",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@quasar/extras": "^1.17.0",
@@ -14,13 +19,21 @@
     "@supabase/supabase-js": "^2.49.9",
     "dotenv": "^16.5.0",
     "quasar": "^2.18.1",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-router": "4"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
+    "@testing-library/vue": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vue/tsconfig": "^0.7.0",
+    "eslint": "^9.28.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-vue": "^10.1.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
+    "vitest": "^3.2.1",
     "vue-tsc": "^2.2.8"
   }
 }

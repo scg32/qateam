@@ -2,8 +2,10 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { Quasar } from 'quasar';
-import 'quasar/dist/quasar.css';  // Importowanie stylów Quasar
+import 'quasar/dist/quasar.css';
+import router from './router'; // Importuj router
 
 createApp(App)
-  .use(Quasar)  // Dodanie Quasar jako plugin
+  .use(Quasar)
+  .use(router) // Dodaj router do aplikacji
   .mount('#app');
