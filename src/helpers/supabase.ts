@@ -28,3 +28,28 @@ export const insertUserToDatabase = async(user:{}) => {
   }
 
 }
+
+export const loginUser = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  });
+  console.log("🚀 ~ login ~ error:", error)
+  if (data.user) {
+    console.log("🚀 ~ login ~ data:", data)
+    
+  }
+};
+
+export const registerUser = async (email: string, password: string) => {
+ 
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password
+
+  });
+  console.log("🚀 ~ register ~ error:", error)
+  if (data.user) {
+  console.log("🚀 ~ register ~ data:", data)
+  }
+};

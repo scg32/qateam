@@ -31,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { loginUser } from '@/helpers/supabase';
 import { ref } from 'vue';
 
 // Definicja reaktywnych zmiennych
@@ -38,9 +39,14 @@ const email = ref('');
 const password = ref('');
 
 // Funkcja logowania
-const login = () => {
+const login = async () => {
   console.log('Logging in with', email.value, password.value);
-  // Możesz tutaj dodać logikę logowania np. z Supabase
+  const { data, error } = await loginUser(email.value, password.value);
+  if (error) {
+    console.error("Login error:", error);
+  } else {
+    console.log("Logged in user:", user);
+  }
 };
 </script>
 
