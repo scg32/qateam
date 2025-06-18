@@ -34,9 +34,13 @@ export const loginUser = async (email: string, password: string) => {
     email: email,
     password: password,
   });
-  console.log("🚀 ~ login ~ error:", error)
+  if (error) {
+    return null
+  }
+  //console.log("🚀 ~ login ~ error:", error)
   if (data.user) {
-    console.log("🚀 ~ login ~ data:", data)
+    return data.user
+    //console.log("🚀 ~ login ~ data:", data)
     
   }
 };

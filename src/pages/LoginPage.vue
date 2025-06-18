@@ -45,11 +45,11 @@ const password = ref('');
 // Funkcja logowania
 const login = async () => {
   console.log('Logging in with', email.value, password.value);
-  const { data, error } = await loginUser(email.value, password.value);
-  if (error) {
-    console.error("Login error:", error);
+  const response = await loginUser(email.value, password.value);
+  if (!response) {
+    console.error("Login error:", response);
   } else {
-    console.log("Logged in user:", user);
+    console.log("Logged in user:", response);
   }
 };
 </script>
