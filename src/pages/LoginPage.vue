@@ -12,7 +12,6 @@
             v-model="email"
             label="Email"
             type="email"
-            square outlined
             outlined
             class="q-mb-md"
           />
@@ -20,7 +19,7 @@
             v-model="password"
             label="Password"
             type="password"
-            square outlined
+            square 
             outlined
             class="q-mb-md"
           />
