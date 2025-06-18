@@ -3,7 +3,7 @@
   <q-page class="flex flex-center">
     <q-card style="min-width: 350px; max-width: 500px">
       <q-card-section>
-        <div class="text-h6">Login</div>
+        <div class="text-h6 text-center">Login</div>
       </q-card-section>
 
       <q-card-section>
@@ -12,6 +12,7 @@
             v-model="email"
             label="Email"
             type="email"
+            square outlined
             outlined
             class="q-mb-md"
           />
@@ -19,6 +20,7 @@
             v-model="password"
             label="Password"
             type="password"
+            square outlined
             outlined
             class="q-mb-md"
           />
