@@ -35,11 +35,10 @@ export const loginUser = async (email: string, password: string) => {
     password: password,
   });
   if (error) {
-      console.log("🚀 ~ login ~ error:", error)
+    return null
   }
-
   if (data.user) {
-    console.log("🚀 ~ login ~ data:", data)
+    return data.user 
   }
 };
 

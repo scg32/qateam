@@ -9,14 +9,19 @@
             Home
           </q-item-section>
         </q-item>
-        <q-item clickable to="/about">
+        <q-item clickable to="/login">
           <q-item-section>
-            About
+            Login
           </q-item-section>
         </q-item>
         <q-item clickable to="/profile">
           <q-item-section>
             Profile
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/test">
+          <q-item-section>
+            Test
           </q-item-section>
         </q-item>
       </q-list>
@@ -26,7 +31,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
-          Our App - test
+          Testing team
         </q-toolbar-title>
         <q-btn flat round icon="menu" @click="toggleDrawer" />
       </q-toolbar>

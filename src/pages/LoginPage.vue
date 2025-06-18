@@ -3,26 +3,31 @@
   <q-page class="flex flex-center">
     <q-card style="min-width: 350px; max-width: 500px">
       <q-card-section>
-        <div class="text-h6">Login</div>
+        <div class="text-h6 text-center">Login</div>
       </q-card-section>
 
       <q-card-section>
+        <!-- <q-img
+          src="https://picsum.photos/500/300"
+          :ratio="1"
+        /> -->
         <q-form @submit="login">
           <q-input
             v-model="email"
             label="Email"
             type="email"
-            outlined
+            rounded filled
             class="q-mb-md"
           />
           <q-input
             v-model="password"
             label="Password"
             type="password"
+            square 
             outlined
             class="q-mb-md"
           />
-          <q-btn label="Log In" type="submit" color="primary" class="full-width" />
+          <q-btn label="Log In" type="submit" color="primary" class="full-width" glossy fab />
         </q-form>
       </q-card-section>
     </q-card>
@@ -30,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { loginUser } from '@/helpers/supabase';
+import { loginUser, registerUser } from '@/helpers/supabase';
 import { ref } from 'vue';
 
 // Definicja reaktywnych zmiennych
@@ -41,8 +46,8 @@ const password = ref('');
 const login = async () => {
   console.log('Logging in with', email.value, password.value);
   const response = await loginUser(email.value, password.value);
-  if (response === null) {
-    console.error("Login error");
+  if (!response) {
+    console.error("Login error:", response);
   } else {
     console.log("Logged in user:", response);
   }
