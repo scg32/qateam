@@ -3,7 +3,7 @@
   <q-page class="flex flex-center">
     <q-card style="min-width: 350px; max-width: 500px">
       <q-card-section>
-        <div class="text-h6">Login</div>
+        <div class="text-h6 text-center">Login</div>
       </q-card-section>
 
       <q-card-section>
@@ -23,7 +23,8 @@
             v-model="password"
             label="Password"
             type="password"
-            filled
+            square 
+            outlined
             class="q-mb-md"
           />
           <q-btn label="Log In" type="submit" color="primary" class="full-width" glossy fab />
@@ -34,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import { loginUser } from '@/helpers/supabase';
 import { ref } from 'vue';
 
 // Definicja reaktywnych zmiennych
@@ -41,9 +43,14 @@ const email = ref('');
 const password = ref('');
 
 // Funkcja logowania
-const login = () => {
+const login = async () => {
   console.log('Logging in with', email.value, password.value);
-  // Możesz tutaj dodać logikę logowania np. z Supabase
+  const { data, error } = await loginUser(email.value, password.value);
+  if (error) {
+    console.error("Login error:", error);
+  } else {
+    console.log("Logged in user:", user);
+  }
 };
 </script>
 
