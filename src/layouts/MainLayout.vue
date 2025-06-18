@@ -26,7 +26,7 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title>
-          Our App
+          Our App - test
         </q-toolbar-title>
         <q-btn flat round icon="menu" @click="toggleDrawer" />
       </q-toolbar>

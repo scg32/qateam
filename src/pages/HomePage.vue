@@ -21,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+import { fetchUsers } from '../helpers/supabase.ts';
+console.log(fetchUsers);
 </script>
 
 <style scoped>
