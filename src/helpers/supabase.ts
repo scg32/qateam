@@ -6,12 +6,15 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const fetchUsers = async() => {
-    const { data, error } = await supabase
-  .from('users')
-  .select()
+  const user = await supabase.auth.getUser();
+  console.log(user);
+
+  const { data, error } = await supabase
+  .from('usr_user')
+  .select('*')
 
   if(error){
-    console.log('Error');
+    console.log('Errorr', error);
     return [];
   }
 

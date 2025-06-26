@@ -35,8 +35,14 @@
 </template>
 
 <script setup lang="ts">
-import { loginUser, registerUser } from '@/helpers/supabase';
+import { loginUser, registerUser, fetchUsers } from '@/helpers/supabase';
 import { ref } from 'vue';
+import { onMounted } from 'vue'
+
+onMounted(async () => {
+  const users = await fetchUsers()
+  console.log('Użytkownicy:', users)
+})
 
 // Definicja reaktywnych zmiennych
 const email = ref('');

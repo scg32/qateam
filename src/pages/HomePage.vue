@@ -22,7 +22,12 @@
 
 <script setup lang="ts">
 import { fetchUsers } from '../helpers/supabase.ts';
-console.log(fetchUsers);
+import { onMounted } from 'vue'
+
+onMounted(async () => {
+  const users = await fetchUsers()
+  console.log('Użytkownicy:', users)
+})
 </script>
 
 <style scoped>
