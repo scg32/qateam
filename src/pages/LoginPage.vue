@@ -1,9 +1,15 @@
 <!-- src/views/Login.vue -->
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center"> 
     <q-card style="min-width: 350px; max-width: 500px">
+      <div class="col-4">
+        <q-img
+          src="logo_project_clinic_qa.jpg"
+          :ratio="16/9"
+        />
+      </div>
       <q-card-section>
-        <div class="text-h6">Login</div>
+        <div class="text-h6">Sign in</div>
       </q-card-section>
 
       <q-card-section>
@@ -22,7 +28,7 @@
             outlined
             class="q-mb-md"
           />
-          <q-btn label="Log In" type="submit" color="primary" class="full-width" />
+          <q-btn label="Log In" type="submit" color="cyan-10" class="glossy full-width" />
         </q-form>
       </q-card-section>
     </q-card>
@@ -51,6 +57,7 @@ const login = async () => {
 
 <style scoped>
 .q-page {
-  background-color: #f7f7f7;
+  background-image: url('background2.png');
+  background-size: cover
 }
 </style>
