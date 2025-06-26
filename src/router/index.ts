@@ -1,5 +1,6 @@
 // src/router/index.ts
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import { supabase } from '../helpers/supabase';
 
 // Importuj komponenty
 import LoginPage from '../pages/LoginPage.vue';
@@ -35,6 +36,40 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory('/'),
   routes,
+});
+
+// Router guard - sprawdza token w localStorage i sesję Supabase
+router.beforeEach(async (to, from, next) => {
+  try {
+    // Sprawdź obecną sesję Supabase
+    const { data: { session }, error } = await supabase.auth.getSession();
+    
+    if (error) {
+      console.error('Błąd podczas sprawdzania sesji:', error);
+    }
+
+    const isAuthenticated = !!session;
+    const isLoginPage = to.path === '/login';
+
+    // Jeśli użytkownik jest zalogowany i próbuje wejść na stronę logowania
+    if (isAuthenticated && isLoginPage) {
+      next('/'); // Przekieruj na stronę główną
+      return;
+    }
+
+    // Jeśli użytkownik nie jest zalogowany i próbuje wejść na chronioną stronę
+    if (!isAuthenticated && !isLoginPage) {
+      next('/login'); // Przekieruj na stronę logowania
+      return;
+    }
+
+    // W pozostałych przypadkach pozwól na przejście
+    next();
+  } catch (error) {
+    console.error('Błąd w router guard:', error);
+    // W przypadku błędu przekieruj na login dla bezpieczeństwa
+    next('/login');
+  }
 });
 
 export default router;
