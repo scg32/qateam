@@ -54,3 +54,21 @@ export const registerUser = async (email: string, password: string) => {
   console.log("🚀 ~ register ~ data:", data)
   }
 };
+
+export const logoutUser = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error('Błąd podczas wylogowywania:', error);
+    return false;
+  }
+  return true;
+};
+
+export const getCurrentUser = async () => {
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error('Błąd podczas pobierania użytkownika:', error);
+    return null;
+  }
+  return user;
+};
