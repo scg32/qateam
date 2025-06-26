@@ -43,10 +43,13 @@
 <script setup lang="ts">
 import { loginUser, registerUser } from '@/helpers/supabase';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 // Definicja reaktywnych zmiennych
 const email = ref('');
 const password = ref('');
+
+const router = useRouter();
 
 // Funkcja logowania
 const login = async () => {
@@ -56,6 +59,7 @@ const login = async () => {
     console.error("Login error:", response);
   } else {
     console.log("Logged in user:", response);
+    router.push('/'); // Przekierowanie po udanym logowaniu
   }
 };
 </script>
