@@ -1,55 +1,52 @@
 // src/supabase.ts
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const fetchUsers = async() => {
-    const { data, error } = await supabase
-  .from('users')
-  .select()
+export const fetchUsers = async () => {
+  // const user = await supabase.auth.getUser();
+  // console.log(user);
 
-  if(error){
-    console.log('Error');
+  const { data, error } = await supabase.from("usr_user").select("*");
+
+  if (error) {
+    console.log("Fetch error", error);
     return [];
   }
 
   return data;
-}
+};
 
-export const insertUserToDatabase = async(user:{}) => {
-    const { error } = await supabase
-  .from('countries')
-  .insert(user)
-  
-  if(error){
-    return 'Cannot add user to database';
+export const insertUserToDatabase = async (user: {}) => {
+  const { error } = await supabase.from("countries").insert(user);
+
+  if (error) {
+    return "Cannot add user to database";
   }
-
-}
+};
 
 export const loginUser = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
   });
-  console.log("🚀 ~ login ~ error:", error)
+  if (error) {
+    return null;
+  }
   if (data.user) {
-    console.log("🚀 ~ login ~ data:", data)
-    
+    return data.user;
   }
 };
 
 export const registerUser = async (email: string, password: string) => {
- 
   const { data, error } = await supabase.auth.signUp({
     email: email,
-    password: password
-
+    password: password,
   });
-  console.log("🚀 ~ register ~ error:", error)
+  console.log("🚀 ~ register ~ error:", error);
   if (data.user) {
-  console.log("🚀 ~ register ~ data:", data)
+    console.log("🚀 ~ register ~ data:", data);
   }
 };

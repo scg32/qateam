@@ -30,12 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import { loginUser } from '@/helpers/supabase';
+import { loginUser, fetchUsers } from '@/helpers/supabase';
 import { ref } from 'vue';
 
 // Definicja reaktywnych zmiennych
 const email = ref('');
 const password = ref('');
+
+console.log(await fetchUsers());
 
 // Funkcja logowania
 const login = async () => {
