@@ -36,13 +36,16 @@
 
 <script setup lang="ts">
 import { loginUser, fetchUsers } from '@/helpers/supabase';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // Definicja reaktywnych zmiennych
 const email = ref('');
 const password = ref('');
 
-console.log(await fetchUsers());
+onMounted(async () => {
+  const users = await fetchUsers()
+  console.log('Użytkownicy:', users)
+})
 
 // Funkcja logowania
 const login = async () => {
