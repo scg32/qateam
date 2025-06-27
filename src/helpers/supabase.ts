@@ -1,25 +1,99 @@
 // src/supabase.ts
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type User } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
+//==================================== Users ====================================//
 export const fetchUsers = async() => {
-  const user = await supabase.auth.getUser();
-  console.log(user);
-
   const { data, error } = await supabase
   .from('usr_user')
   .select('*')
 
   if(error){
-    console.log('Errorr', error);
+    console.log('Error', error);
+    return null;
+  }
+
+  return data;
+}
+
+export const fetchUserById = async(id: number) => {
+  const {data, error} = await supabase
+  .from('usr_user')
+  .select('*')
+  .eq('id', id)
+  .single();
+
+  if(error){
+    console.log('Error', error);
+    return null;
+  }
+
+  return data;
+}
+
+export const fetchCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error('Error fetching current user:', error);
+    return null;
+  }
+  return data;
+};
+
+export const updateUserById = async (id: number, userData: Partial<User>) => {
+  const { data, error } = await supabase
+    .from('usr_user')
+    .update(userData)
+    .eq('id', id)
+    .select('*')
+    .single();
+
+  console.log('Test');
+
+  if (error) {
+    console.error('Error updating user:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export const insertUserById = async (id: number, userData: Partial<User>) => {
+  const { data, error } = await supabase
+    .from('usr_user')
+    .insert([{ id, ...userData }])
+    .select('*')
+    .single();
+
+  if (error) {
+    console.error('Error inserting user:', error);
+    return null;
+  }
+
+  return data;
+}
+
+//==================================== Users ====================================//
+
+export const fetchRoles = async() => {
+  const {data, error} = await supabase
+  .from('usr_role')
+  .select('*')
+
+  if(error){
+    console.log('Error', error);
     return [];
   }
 
   return data;
 }
+
+
+
+
 
 export const insertUserToDatabase = async(user:{}) => {
     const { error } = await supabase
