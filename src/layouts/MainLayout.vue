@@ -9,11 +9,12 @@
             Home
           </q-item-section>
         </q-item>
-        <q-item clickable to="/login">
+        <q-item clickable to="/administration">
           <q-item-section>
-            Login
+            Administration
           </q-item-section>
         </q-item>
+        
         <q-item clickable to="/profile">
           <q-item-section>
             Profile
