@@ -6,6 +6,18 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 //==================================== Users ====================================//
+type NewUser = {
+  role_id?: number;
+  username?: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  email?: string;
+  phone_num?: string;
+  is_active: boolean;
+  is_superadmin: boolean;
+}
+
 export const fetchUsers = async() => {
   const { data, error } = await supabase
   .from('usr_user')
@@ -43,15 +55,13 @@ export const fetchCurrentUser = async () => {
   return data;
 };
 
-export const updateUserById = async (id: number, userData: Partial<User>) => {
+export const updateUserById = async (id: number, userData: Partial<NewUser>) => {
   const { data, error } = await supabase
     .from('usr_user')
     .update(userData)
     .eq('id', id)
     .select('*')
     .single();
-
-  console.log('Test');
 
   if (error) {
     console.error('Error updating user:', error);
@@ -61,15 +71,35 @@ export const updateUserById = async (id: number, userData: Partial<User>) => {
   return data;
 }
 
-export const insertUserById = async (id: number, userData: Partial<User>) => {
+export const insertUser = async (user: NewUser) => {
   const { data, error } = await supabase
     .from('usr_user')
-    .insert([{ id, ...userData }])
+    .insert([user])
     .select('*')
     .single();
 
   if (error) {
     console.error('Error inserting user:', error);
+    return null;
+  }
+
+  return data;
+}
+
+export const deleteUser = async (id: number) => {
+  const {data, error} = await supabase
+    .from('usr_user')
+    .delete()
+    .eq('id', id)
+    .select('*');
+
+  if (error) {
+    console.error('Error deleting user:', error);
+    return null;
+  }
+
+  if (!data || data.length === 0) {
+    console.warn('No user found with the given ID.');
     return null;
   }
 
@@ -90,10 +120,6 @@ export const fetchRoles = async() => {
 
   return data;
 }
-
-
-
-
 
 export const insertUserToDatabase = async(user:{}) => {
     const { error } = await supabase
