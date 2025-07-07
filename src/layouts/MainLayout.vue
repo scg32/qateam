@@ -9,6 +9,7 @@
             Home
           </q-item-section>
         </q-item>
+
         <!-- Główne menu: Appointments z podmenu -->
     <q-expansion-item
       icon="event"
@@ -26,6 +27,7 @@
           </q-item-section>
         </q-item>
         <q-item clickable to="/users">
+
           <q-item-section>
             Users
           </q-item-section>
