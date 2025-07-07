@@ -8,7 +8,8 @@ import Home from '../pages/HomePage.vue';
 import MainLayout from '../layouts/MainLayout.vue'; 
 import LoginLayout from '../layouts/LoginLayout.vue'; 
 import NotFound from '../pages/NotFound.vue'; // Używamy MainLayout dla Home i About
-import Administration from '../pages/Administration.vue';
+import UserPage from '../pages/UserPage.vue';
+
 
 // Zdefiniuj trasy
 const routes: Array<RouteRecordRaw> = [
@@ -17,6 +18,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Login',
     component: LoginPage,
     meta: { layout: LoginLayout },
+  },
+  {
+    path: '/users',
+    name: 'User',
+    component: UserPage,
+    meta: { layout: MainLayout },
   },
   {
     path: '/',

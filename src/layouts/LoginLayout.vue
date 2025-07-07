@@ -1,7 +1,9 @@
 <!-- src/layouts/LoginLayout.vue -->
 <template>
-  <q-layout view="hHh LpR lFr">
+  <q-layout view="hHh lpR fFf">
+   
     <q-page-container>
+       <!-- <q-img src="vite.svg"></q-img> -->
       <router-view /> 
     </q-page-container>
   </q-layout>
