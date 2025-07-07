@@ -1,23 +1,13 @@
 // src/supabase.ts
 import { createClient, type User } from '@supabase/supabase-js';
+import type { IUser } from '@/interfaces/IUser';
+
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 //==================================== Users ====================================//
-type NewUser = {
-  role_id?: number;
-  username?: string;
-  first_name: string;
-  last_name: string;
-  password: string;
-  email?: string;
-  phone_num?: string;
-  is_active: boolean;
-  is_superadmin: boolean;
-}
-
 export const fetchUsers = async() => {
   const { data, error } = await supabase
   .from('usr_user')
@@ -55,7 +45,7 @@ export const fetchCurrentUser = async () => {
   return data;
 };
 
-export const updateUserById = async (id: number, userData: Partial<NewUser>) => {
+export const updateUserById = async (id: number, userData: Partial<IUser>) => {
   const { data, error } = await supabase
     .from('usr_user')
     .update(userData)
@@ -71,10 +61,10 @@ export const updateUserById = async (id: number, userData: Partial<NewUser>) => 
   return data;
 }
 
-export const insertUser = async (user: NewUser) => {
+export const insertUser = async (user: IUser) => {
   const { data, error } = await supabase
     .from('usr_user')
-    .insert([user])
+    .insert(user)
     .select('*')
     .single();
 
@@ -105,7 +95,6 @@ export const deleteUser = async (id: number) => {
 
   return data;
 }
-
 //==================================== Users ====================================//
 
 export const fetchRoles = async() => {
@@ -140,8 +129,9 @@ export const loginUser = async (email: string, password: string) => {
   if (error) {
     return null
   }
-  if (data.user) {
-    return data.user 
+  if (data) {
+    // return data.user 
+    return data
   }
 };
 
