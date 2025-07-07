@@ -9,31 +9,40 @@
             Home
           </q-item-section>
         </q-item>
-        <q-item clickable to="/login">
+
+        <!-- Główne menu: Appointments z podmenu -->
+    <q-expansion-item
+      icon="event"
+      label="Appointments"
+      expand-separator
+      default-opened
+    >
+      <q-item clickable to="/appointments/add">
+        <q-item-section>Add a new appointment</q-item-section>
+      </q-item>
+      </q-expansion-item>
+        <q-item clickable to="/patients">
           <q-item-section>
-            Login
+            Patients
           </q-item-section>
         </q-item>
-        <q-item clickable to="/profile">
+        <q-item clickable to="/users">
+
           <q-item-section>
-            Profile
-          </q-item-section>
-        </q-item>
-        <q-item clickable to="/test">
-          <q-item-section>
-            Test
+            Users
           </q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
 
     <!-- Nagłówek -->
+     
     <q-header elevated>
       <q-toolbar>
+      <q-btn flat round icon="menu" @click="toggleDrawer" />
         <q-toolbar-title>
-          Testing team
+          QA Clinic
         </q-toolbar-title>
-        <q-btn flat round icon="menu" @click="toggleDrawer" />
       </q-toolbar>
     </q-header>
 
@@ -44,7 +53,7 @@
 
     <!-- Footer -->
     <q-footer class="text-center">
-      <q-btn label="Footer Content" />
+      <q-btn label="Have a nice day!" />
     </q-footer>
   </q-layout>
 </template>

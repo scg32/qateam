@@ -8,6 +8,8 @@ import Home from '../pages/HomePage.vue';
 import MainLayout from '../layouts/MainLayout.vue'; 
 import LoginLayout from '../layouts/LoginLayout.vue'; 
 import NotFound from '../pages/NotFound.vue'; // Używamy MainLayout dla Home i About
+import UserPage from '../pages/UserPage.vue';
+
 
 // Zdefiniuj trasy
 const routes: Array<RouteRecordRaw> = [
@@ -18,9 +20,21 @@ const routes: Array<RouteRecordRaw> = [
     meta: { layout: LoginLayout },
   },
   {
+    path: '/users',
+    name: 'User',
+    component: UserPage,
+    meta: { layout: MainLayout },
+  },
+  {
     path: '/',
     name: 'Home',
     component: Home,
+    meta: { layout: MainLayout },  // Przypisujemy layout dla strony Home
+  },
+  {
+    path: '/administration',
+    name: 'Administration',
+    component: Administration,
     meta: { layout: MainLayout },  // Przypisujemy layout dla strony Home
   },
   // Dodaj trasę dla 404 Not Found
