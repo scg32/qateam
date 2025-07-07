@@ -36,6 +36,26 @@ export const fetchUserById = async(id: number) => {
   return data;
 }
 
+export const fetchUserByUserId = async(userId: string) => {
+    if (!userId) {
+    console.warn('Brak user_id');
+    return null;
+  }
+
+  const {data, error} = await supabase
+  .from('usr_user')
+  .select('*')
+  .eq('user_id', userId)
+  .single();
+
+  if(error){
+    console.log('Error', error);
+    return null;
+  }
+
+  return data;
+}
+
 export const fetchCurrentUser = async () => {
   const { data, error } = await supabase.auth.getUser();
   if (error) {
@@ -43,6 +63,25 @@ export const fetchCurrentUser = async () => {
     return null;
   }
   return data;
+};
+
+export const fetchCurrentUserInfo = async () => {
+  const currentUser = await fetchCurrentUser();
+  
+  if (!currentUser) return null;
+  const userInfo = await fetchUserByUserId(currentUser.user.id);
+
+  return userInfo;
+};
+
+export const fetchCurrentUserRoles = async () => {
+  const currentUserInfo = await fetchCurrentUserInfo();
+
+  if (!currentUserInfo) return null;
+
+  const userRoles = currentUserInfo.role_ids;
+
+  return userRoles;
 };
 
 export const updateUserById = async (id: number, userData: Partial<IUser>) => {
@@ -130,25 +169,22 @@ export const loginUser = async (email: string, password: string) => {
     return null
   }
   if (data) {
-    // return data.user 
     return data
   }
 };
 
 export const registerUser = async (email: string, password: string) => {
- 
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password
-
   });
 
   if (error) {
-  console.log("🚀 ~ register ~ error:", error)
+    return null
   }
   
   if (data.user) {
-  console.log("🚀 ~ register ~ data:", data)
+    return data;
   }
 };
 
