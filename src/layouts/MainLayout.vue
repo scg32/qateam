@@ -60,13 +60,12 @@
     </q-drawer>
 
     <!-- Nagłówek -->
-     
     <q-header elevated>
       <q-toolbar>
-      <q-btn flat round icon="menu" @click="toggleDrawer" />
         <q-toolbar-title>
-          QA Clinic
+          Testing team
         </q-toolbar-title>
+        <q-btn flat round icon="menu" @click="toggleDrawer" />
       </q-toolbar>
     </q-header>
 
@@ -77,7 +76,7 @@
 
     <!-- Footer -->
     <q-footer class="text-center">
-      <q-btn label="Have a nice day!" />
+      <q-btn label="Footer Content" />
     </q-footer>
   </q-layout>
 </template>
