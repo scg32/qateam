@@ -43,7 +43,15 @@
           val => val && val.length > 0 || 'Please type something',
         ]"
       />
-
+      <q-input v-model="password" label="Password *" filled :type="isPwd ? 'password' : 'text'" hint="Fill in your password">
+        <template v-slot:append>
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+            class="cursor-pointer"
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
       <q-input 
         v-model="tel" 
         filled type="tel" 
@@ -76,6 +84,7 @@ const firstName = ref('')
 const lastName = ref('')
 const dateOfBirth = ref('')
 const email = ref('')
+const password = ref('')
 const tel = ref('')
 const speciality = ref('')
 
@@ -95,6 +104,7 @@ function onReset () {
   lastName.value = ''
   dateOfBirth.value = ''
   email.value = ''
+  password.value = ''
   tel.value = ''
   speciality.value = ''
 }
