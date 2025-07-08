@@ -9,6 +9,7 @@ import MainLayout from '../layouts/MainLayout.vue';
 import LoginLayout from '../layouts/LoginLayout.vue'; 
 import NotFound from '../pages/NotFound.vue'; // Używamy MainLayout dla Home i About
 import Administration from '../pages/Administration.vue';
+import PatientsPage from '../pages/PatientsPage.vue';
 
 // Zdefiniuj trasy
 const routes: Array<RouteRecordRaw> = [
@@ -29,6 +30,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Administration',
     component: Administration,
     meta: { layout: MainLayout },  // Przypisujemy layout dla strony Home
+  },
+  {
+    path: '/patients',
+    name: 'Patient',
+    component: PatientsPage,
+    meta: { layout: MainLayout }, // Przypisujemy layout dla strony Home
   },
   // Dodaj trasę dla 404 Not Found
   {
