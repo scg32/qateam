@@ -2,6 +2,7 @@
 <div>Patient registration form</div>
 <div class="q-pa-md" style="max-width: 400px">
 
+  
     <q-form
       @submit="addPatient"
       @reset="onReset"
