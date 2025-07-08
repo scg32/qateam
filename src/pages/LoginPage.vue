@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { loginUser, registerUser } from '@/helpers/supabase';
+import { loginUser, registerUser, fetchUsers } from '@/helpers/supabase';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
