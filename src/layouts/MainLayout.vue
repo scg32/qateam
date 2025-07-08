@@ -58,20 +58,24 @@
       </q-expansion-item>
         <!-- <q-item clickable to="/users">
           <q-item-section>
-            Users
+            Profile
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/test">
+          <q-item-section>
+            Test
           </q-item-section>
         </q-item> -->
       </q-list>
     </q-drawer>
 
     <!-- Nagłówek -->
-     
     <q-header elevated>
       <q-toolbar>
-      <q-btn flat round icon="menu" @click="toggleDrawer" />
         <q-toolbar-title>
-          QA Clinic
+          Testing team
         </q-toolbar-title>
+        <q-btn flat round icon="menu" @click="toggleDrawer" />
       </q-toolbar>
     </q-header>
 
@@ -82,7 +86,7 @@
 
     <!-- Footer -->
     <q-footer class="text-center">
-      <q-btn label="Have a nice day!" />
+      <q-btn label="Footer Content" />
     </q-footer>
   </q-layout>
 </template>
