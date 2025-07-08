@@ -85,6 +85,7 @@ const lastName = ref('')
 const dateOfBirth = ref('')
 const email = ref('')
 const password = ref('')
+const isPwd = ref(true) 
 const tel = ref('')
 const speciality = ref('')
 

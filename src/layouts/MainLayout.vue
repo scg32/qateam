@@ -56,11 +56,6 @@
         <q-item-section>Add a new user</q-item-section>
       </q-item>
       </q-expansion-item>
-        <!-- <q-item clickable to="/users">
-          <q-item-section>
-            Users
-          </q-item-section>
-        </q-item> -->
       </q-list>
     </q-drawer>
 
