@@ -2,7 +2,7 @@
   <div class="q-pa-md" style="max-width: 400px">
 
     <q-form
-      @submit="onSubmit"
+      @submit="addUser"
       @reset="onReset"
       class="q-gutter-md"
     >
@@ -53,7 +53,7 @@
         </template>
       </q-input>
       <q-input 
-        v-model="tel" 
+        v-model="phoneNumber" 
         filled type="tel" 
         label="Mobile phone *"
         hint="Fill in your mobile phone number" 
@@ -63,8 +63,12 @@
       /> 
       <q-select 
         filled 
-        v-model="speciality" 
-        :options="options" 
+        multiple
+        v-model="roleIds" 
+        :options="roles"
+        map-options
+        option-value="id"
+        option-label="name"
         label="User role" 
         hint="Fill in your user role"
       />
@@ -77,8 +81,14 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
+import {fetchRoles} from '../helpers/supabase.ts'
+import type { IUser } from '@/interfaces/IUser';
+
+
+const roles = ref([])
 
 const firstName = ref('')
 const lastName = ref('')
@@ -86,17 +96,14 @@ const dateOfBirth = ref('')
 const email = ref('')
 const password = ref('')
 const isPwd = ref(true) 
-const tel = ref('')
-const speciality = ref('')
+const phoneNumber = ref('')
+const roleIds = ref([])
 
 const model = ref(null)
 
-const options = [
-  'Doctor',
-  'IT Specialist',
-  'Administrator',
-  'Receptionist',
-]
+const addUser = () => {
+  console.log(roleIds.value) //reszta dopisać
+}
 
 function onReset () {
   firstName.value = ''
@@ -104,7 +111,23 @@ function onReset () {
   dateOfBirth.value = ''
   email.value = ''
   password.value = ''
-  tel.value = ''
-  speciality.value = ''
+  phoneNumber.value = ''
+  roleIds.value = []
 }
+const fetchApiRoles = async () => {
+  try {
+    const response = await fetchRoles()
+    console.log('Fetched roles:', response)
+    roles.value = response
+  } catch (error) {
+    console.error('Error fetching roles:', error)
+    return []
+  }
+}
+
+onMounted(() => {
+  fetchApiRoles()
+  })
+
+
 </script>

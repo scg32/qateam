@@ -1,12 +1,13 @@
 export interface IUser {
     username?: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    phone_number?: string;
-    is_active: boolean;
-    is_superadmin?: boolean;
-    user_id: string;
-    user_role: string;
-    role_ids: number[];
+    phoneNumber?: string;
+    isActive: boolean;
+    isSuperadmin?: boolean;
+    userId: string;
+    userRole: string;
+    roleIds: number[];
+    dateOfBirth: string;
 }
