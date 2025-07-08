@@ -13,7 +13,6 @@ import PatientsPage from '../pages/PatientsPage.vue';
 import UsersPage from '../pages/UsersPage.vue';
 import AppointmentsPage from '../pages/AppointmentsPage.vue';
 import SettingsPage from '../pages/SettingsPage.vue';
-import Settings from '@/pages/Settings.vue';
 
 
 // Zdefiniuj trasy
