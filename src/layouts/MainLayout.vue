@@ -1,6 +1,6 @@
 <!-- src/layouts/MainLayout.vue -->
 <template>
-  <q-layout view="lHh Lpr fFf">
+  <q-layout view="hHh Lpr fFf">
     <!-- Drawer (Menu boczne) -->
     <q-drawer v-model="drawerOpen" show-if-above side="left" bordered>
       <q-list>
@@ -12,6 +12,24 @@
         <q-item clickable to="/administration">
           <q-item-section>
             Administration
+          </q-item-section>
+        </q-item>
+        
+        <q-item clickable to="/patients">
+          <q-item-section>
+            Patients
+          </q-item-section>
+        </q-item>
+
+         <q-item clickable to="/users">
+          <q-item-section>
+            Users
+          </q-item-section>
+        </q-item>
+        
+        <q-item clickable to="/appointments">
+          <q-item-section>
+            Appointments
           </q-item-section>
         </q-item>
         
@@ -31,10 +49,11 @@
     <!-- Nagłówek -->
     <q-header elevated>
       <q-toolbar>
+        <q-btn flat round icon="menu" @click="toggleDrawer"/>
         <q-toolbar-title>
           Testing team
         </q-toolbar-title>
-        <q-btn flat round icon="menu" @click="toggleDrawer" />
+        <q-btn flat round icon="settings" to="/settings" />  //Zmiana na darkmode     
       </q-toolbar>
     </q-header>
 
