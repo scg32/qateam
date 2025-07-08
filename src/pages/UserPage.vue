@@ -65,8 +65,8 @@
         filled 
         v-model="speciality" 
         :options="options" 
-        label="Speciality" 
-        hint="Fill in your speciality"
+        label="User role" 
+        hint="Fill in your user role"
       />
       <div>
         <q-btn label="Submit" type="submit" color="primary"/>
@@ -92,9 +92,7 @@ const speciality = ref('')
 const model = ref(null)
 
 const options = [
-  'Radiologist',
-  'Radiographer',
-  'Aid',
+  'Doctor',
   'IT Specialist',
   'Administrator',
   'Receptionist',
