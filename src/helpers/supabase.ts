@@ -1,6 +1,9 @@
 // src/supabase.ts
 import { createClient, type User } from '@supabase/supabase-js';
 import type { IUser } from '@/interfaces/IUser';
+import type { IPatient } from '@/interfaces/IPatient';
+import type { IDoctor } from '@/interfaces/IDoctor';
+import { toSnakeCase } from '@/utils/caseConversion';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
@@ -38,7 +41,7 @@ export const fetchUserById = async(id: number) => {
 
 export const fetchUserByUserId = async(userId: string) => {
     if (!userId) {
-    console.warn('Brak user_id');
+    console.warn('Missing user_id');
     return null;
   }
 
@@ -84,6 +87,7 @@ export const fetchCurrentUserRoles = async () => {
   return userRoles;
 };
 
+// toSnakeCase will be added here
 export const updateUserById = async (id: number, userData: Partial<IUser>) => {
   const { data, error } = await supabase
     .from('usr_user')
@@ -100,10 +104,11 @@ export const updateUserById = async (id: number, userData: Partial<IUser>) => {
   return data;
 }
 
+// toSnakeCase will be added here
 export const insertUser = async (user: IUser) => {
   const { data, error } = await supabase
     .from('usr_user')
-    .insert(user)
+    .insert(toSnakeCase(user))
     .select('*')
     .single();
 
@@ -134,7 +139,136 @@ export const deleteUser = async (id: number) => {
 
   return data;
 }
-//==================================== Users ====================================//
+//==================================== Users =======================================//
+
+//==================================== Patients ====================================//
+
+export const fetchPatients = async () => {
+  const {data, error} = await supabase
+  .from('apt_patient')
+  .select('*')
+
+  if(error){
+    console.log('Error', error);
+    return null;
+  }
+  return data;
+}
+
+export const fetchPatientById = async (id: number) => {
+  const {data, error} = await supabase
+  .from('apt_patient')
+  .select('*')
+  .eq('id', id)
+  .single();
+
+  if(error){
+    console.log('Error', error);
+    return null;
+  }
+
+  return data;
+}
+
+// toSnakeCase will be added here
+export const insertPatient = async (patient: IPatient) => {
+  const {data, error} = await supabase
+  .from('apt_patient')
+  .insert(patient)
+  .select('*')
+  .single();
+
+  if (error) {
+    console.error('Error inserting patient:', error);
+    return null;
+  }
+
+  return data;
+}
+
+// toSnakeCase will be added here
+export const updatePatientById = async (id: number, patientData: Partial<IPatient>) => {
+  const {data, error} = await supabase
+  .from('apt_patient')
+  .update(patientData)
+  .eq('id', id)
+  .select('*')
+  .single();
+
+  if (error) {
+    console.error('Error updating patient:', error);
+    return null;
+  }
+
+  return data;
+}
+//==================================== Patients ====================================//
+
+//==================================== Doctors =====================================//
+
+export const fetchDoctors = async () => {
+  const {data, error} = await supabase
+  .from('apt_doctor')
+  .select('*')
+
+  if(error){
+    console.log('Error', error);
+    return null;
+  }
+
+  return data;
+}
+
+export const fetchDoctorById = async (id: number) => {
+  const {data, error} = await supabase
+  .from('apt_doctor')
+  .select('*')
+  .eq('id', id)
+  .single();
+
+  if(error){
+    console.log('Error', error);
+    return null;
+  }
+
+  return data;
+}
+
+// toSnakeCase will be added here
+export const insertDoctor = async (doctor: IDoctor) => {
+  const {data, error} = await supabase
+  .from('apt_doctor')
+  .insert(doctor)
+  .select('*')
+  .single();
+
+  if (error) {
+    console.error('Error inserting doctor:', error);
+    return null;
+  }
+
+  return data;
+}
+
+// toSnakeCase will be added here
+export const updateDoctorById = async (id: number, doctorData: Partial<IDoctor>) => {
+  const {data, error} = await supabase
+  .from('apt_doctor')
+  .update(doctorData)
+  .eq('id', id)
+  .select('*')
+  .single();
+
+  if (error) {
+    console.error('Error updating doctor:', error);
+    return null;
+  }
+
+  return data;
+}
+//==================================== Doctors ====================================//
+
+
 
 export const fetchRoles = async() => {
   const {data, error} = await supabase
@@ -157,9 +291,10 @@ export const insertUserToDatabase = async(user:{}) => {
   if(error){
     return 'Cannot add user to database';
   }
-
 }
 
+//==================================== Supabase functions ====================================//
+ 
 export const loginUser = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
@@ -205,3 +340,5 @@ export const getCurrentUser = async () => {
   }
   return user;
 };
+
+//==================================== Supabase functions ====================================//
