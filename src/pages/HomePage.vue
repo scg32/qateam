@@ -33,16 +33,17 @@ import type { IUser } from '@/interfaces/IUser';
 
 
 const mockUser: IUser = {
-  username: 'testuser',
-  first_name: 'Test',
-  last_name: 'User',
-  email: 'testUser@example.com',
-  phone_number: '123456789',
-  is_active: true,
-  is_superadmin: false,
-  user_id: '',
-  user_role: 'authenticated',
-  role_ids: [3,2,1]
+  username: 'testuser123213',
+  firstName: 'Test123',
+  lastName: 'User321321',
+  email: '322334testUser@example.com',
+  phoneNumber: '54123456789',
+  isActive: true,
+  isSuperadmin: false,
+  userId: '',
+  userRole: 'authenticated',
+  roleIds: [3,2,1],
+  dateOfBirth: '2000-01-01'
 };
 
 const register = async () => {
@@ -58,15 +59,16 @@ const register = async () => {
       console.log('Inserting into database...');
       const insertedUser = await insertUser({
         username: dataUser?.email?.split('@')[0],
-        first_name: mockUser.first_name,
-        last_name: mockUser.last_name,
+        firstName: mockUser.firstName,
+        lastName: mockUser.lastName,
         email: dataUser?.email!,
-        phone_number: mockUser.phone_number,
-        is_active: mockUser.is_active,
-        is_superadmin: mockUser.is_superadmin,
-        user_id: dataUser?.id!,
-        user_role: dataUser?.role ?? 'authenticated',
-        role_ids: mockUser.role_ids
+        phoneNumber: mockUser.phoneNumber,
+        isActive: mockUser.isActive,
+        isSuperadmin: mockUser.isSuperadmin,
+        userId: dataUser?.id!,
+        userRole: dataUser?.role ?? 'authenticated',
+        roleIds: mockUser.roleIds,
+        dateOfBirth: mockUser.dateOfBirth
       });
     } else {
       console.warn('User already exists in usr_user');
