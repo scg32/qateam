@@ -10,11 +10,12 @@
     >
      <q-input
         filled
-        v-model="pesel"
+        v-model="patientNumber"
         label="PESEL *"
         hint="Fill in your pesel number"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please use numebrs only']"
+        :rules="[ val => !!val || 'Please type something, the field should not be empty',
+                  val => val.length <= 11 || 'Please use less than 11 digits']"
         :dense="dense"
       />
       <q-input
@@ -37,7 +38,8 @@
       />
       
      <q-input
-        v-model="dateOfBirth"
+        v-model="birthDate"
+        mask="DD-MM-YYYY"
         filled type = "date"
         label="Date of birth *"
         hint="Fill in your date of birth"
@@ -51,7 +53,7 @@
        <q-select 
         filled 
         v-model="gender" 
-        :options="options1" 
+        :options="pSex" 
         label="Gender"  
         :dense="dense"   
       />
@@ -67,7 +69,7 @@
        <q-input
         filled
         v-model="phoneNumber"
-        label="Mobile number *"
+        label="Phone *"
         hint="Fill in your mobile phone number"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Please type numbers only']"
@@ -76,7 +78,7 @@
       <q-select 
         filled 
         v-model="country" 
-        :options="options2" 
+        :options="country2" 
         label="Country" 
         :dense="dense"    
       />
@@ -113,13 +115,15 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { country2 } from '@/data/country';
+import { pSex } from '@/data/patientSex';
 
 const dense = ref(true)
 
-const pesel = ref('')
+const patientNumber = ref('')
 const firstName = ref('')
 const lastName = ref('')
-const dateOfBirth = ref('')
+const birthDate = ref('')
 const gender = ref('')
 const email = ref('')
 const phoneNumber = ref('')
@@ -127,59 +131,14 @@ const country = ref('')
 const address = ref('')
 const city = ref('')
 
-const options1 = [
-  'Female',
-  'Male',
-  'Other',
-  'Prefer not to say'
-]
-
-const options2 = [
-  "Australia",
-    "Austria",
-    "Belgium",
-    "Brazil",
-    "Canada",
-    "China",
-    "Croatia",
-    "Czech Republic",
-    "Denmark",
-    "Egypt",
-    "Finland",
-    "France",
-    "Germany",
-    "Greece",
-    "Hungary",
-    "India",
-    "Indonesia",
-    "Ireland",
-    "Italy",
-    "Japan",
-    "Mexico",
-    "Netherlands",
-    "Norway",
-    "Poland",
-    "Portugal",
-    "Russia",
-    "Saudi Arabia",
-    "South Korea",
-    "Spain",
-    "Sweden",
-    "Switzerland",
-    "Thailand",
-    "Turkey",
-    "United Kingdom",
-    "United States"
-]
-
 const router = useRouter();
 
 const addPatient = () => {
   console.log('Patient added:', {
-    pesel: pesel.value,
+    patientNumber: patientNumber.value,
     firstName: firstName.value,
     lastName: lastName.value,
-    dateOfBirth: dateOfBirth,
+    birthDate: birthDate.value,
     gender: gender.value,
     email: email.value,
     phoneNumber: phoneNumber.value,
@@ -190,16 +149,16 @@ const addPatient = () => {
 );
 }
 const onReset = () =>{
-   pesel.value = '',
+   patientNumber.value = '',
    firstName.value = '',
    lastName.value = '',
-   dateOfBirth.value = '',
-    gender.value = '',
-    email.value ='',
-    phoneNumber.value = '',
-    country.value = '',
+   birthDate.value = '',
+   gender.value = '',
+   email.value ='',
+   phoneNumber.value = '',
+   country.value = '',
    address.value = '',
-    city.value = ''
+   city.value = ''
   }
 
 </script>

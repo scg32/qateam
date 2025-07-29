@@ -1,1 +1,1 @@
-export const gender = [ 'Female', 'Male', 'Other', 'Prefer not to say' ]
+export const pSex = [ 'Female', 'Male', 'Other', 'Prefer not to say' ]
